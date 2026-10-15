@@ -963,7 +963,7 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: v
   .flow { grid-template-columns: 1fr 1fr; }
   .feature-grid { grid-template-columns: 1fr 1fr; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .pin-grid, .later-grid, .status-layout { grid-template-columns: 1fr 1fr; }
+  .pin-grid, .status-layout { grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1.2fr 1fr; align-items: end; }
   .footer-links { justify-content: flex-end; }
 }
@@ -989,6 +989,7 @@ input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: v
   }
   .site-nav a.nav-cta { display: none; }
   .hero-grid, .kit-grid, .join-panel { grid-template-columns: 1.05fr 0.95fr; gap: 40px; }
+  .later-grid { grid-template-columns: 1fr 1fr; }
   .join-panel { align-items: start; }
   .timeline { grid-template-columns: 1fr 1fr; }
 }
