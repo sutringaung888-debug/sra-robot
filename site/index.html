@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SRA Robot — a personal AI companion you can build for about $65</title>
+  <meta name="description" content="Build SRA Robot, a personal AI companion, for about $65. ESP32-S3 body, Hermes brain, free LLM. No soldering. It hears, thinks, talks, and learns.">
+  <meta name="theme-color" content="#090a0d">
+  <meta property="og:title" content="SRA Robot — a personal AI companion you can build">
+  <meta property="og:description" content="About $65. No soldering. ESP32-S3 body, Hermes brain, free LLM. It hears, thinks, talks, and learns.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/syne-normal-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/outfit-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="SRA Robotics home">
+        <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="1.25" y="1.25" width="29.5" height="29.5" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="14" r="1.7" fill="#d6ff4a"/>
+          <circle cx="20" cy="14" r="1.7" fill="#d6ff4a"/>
+          <path d="M11 20.5h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M16 1.5V6" stroke="#d6ff4a" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>SRA <span class="logo-sub">Robotics</span></span>
+      </a>
+      <nav id="site-nav" class="site-nav" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#kit">The kit</a>
+        <a href="#build">Build</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#join">Get updates</a>
+      </nav>
+      <a class="btn btn-primary btn-small header-cta" href="#join">Get updates</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Menu</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> SRA Robot · v2.0 · Open source</p>
+          <h1>A personal robot that <em>hears</em>, thinks, and talks back.</h1>
+          <p class="lede">Build it for about $65. No soldering, no 3D printer, and no OpenAI subscription. The ESP32-S3 hears and speaks. Hermes, on a computer you already run, thinks with GLM-5.2 on Ollama Cloud’s free tier — and the robot learns what you praise.</p>
+          <ul class="chips">
+            <li><a class="chip" href="#status"><i aria-hidden="true"></i> Brain in the repo</a></li>
+            <li><a class="chip chip-wip" href="#status"><i aria-hidden="true"></i> Voice body in assembly</a></li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#join">Get build updates</a>
+            <a class="btn btn-ghost" href="#kit">See the parts list</a>
+          </div>
+        </div>
+
+        <figure class="hero-visual">
+          <div class="schematic-wrap">
+            <svg class="schematic" viewBox="0 0 640 700" role="img" aria-labelledby="fig-title fig-desc">
+              <title id="fig-title">Schematic of the SRA Robot voice body</title>
+              <desc id="fig-desc">An ESP32-S3 on a breadboard between an INMP441 microphone and a MAX98357 amplifier with a speaker, linked by Wi-Fi to Hermes.</desc>
+              <defs>
+                <pattern id="bb-dots" width="16" height="16" patternUnits="userSpaceOnUse">
+                  <circle cx="1.3" cy="1.3" r="1.15" fill="#3c4250"/>
+                </pattern>
+              </defs>
+              <circle class="pulse-dot" cx="40" cy="42" r="5" fill="#d6ff4a"/>
+              <text class="svg-kicker" x="56" y="48">VOICE BODY</text>
+              <text class="svg-tiny svg-faint" x="600" y="48" text-anchor="end">ASSEMBLY IN PROGRESS</text>
+              <rect x="180" y="78" width="280" height="86" rx="18" fill="#0c0e12" stroke="rgba(214,255,74,0.55)"/>
+              <text class="svg-title" x="320" y="114" text-anchor="middle">HERMES</text>
+              <text class="svg-small" x="320" y="140" text-anchor="middle">GLM-5.2 · Ollama Cloud</text>
+              <path class="wifi-path" d="M320 164 V214" fill="none" stroke="#d6ff4a" stroke-width="1.6"/>
+              <text class="svg-tiny" x="332" y="196">Wi-Fi</text>
+              <rect x="36" y="230" width="568" height="360" rx="20" fill="#161222" stroke="rgba(196,181,253,0.4)"/>
+              <rect x="60" y="252" width="520" height="12" rx="2" fill="#3a2428"/>
+              <rect x="60" y="270" width="520" height="8" rx="2" fill="#1c2836"/>
+              <rect x="60" y="536" width="520" height="8" rx="2" fill="#1c2836"/>
+              <rect x="60" y="550" width="520" height="12" rx="2" fill="#243044"/>
+              <rect x="68" y="292" width="504" height="230" fill="url(#bb-dots)"/>
+              <rect x="68" y="392" width="504" height="22" fill="#161222"/>
+              <rect x="250" y="300" width="140" height="230" rx="10" fill="#0e141c" stroke="#d6ff4a" stroke-width="1.6"/>
+              <text class="svg-label" x="320" y="348" text-anchor="middle">ESP32-S3</text>
+              <text class="svg-tiny" x="320" y="370" text-anchor="middle">N16R8</text>
+              <rect x="292" y="388" width="56" height="48" rx="6" fill="none" stroke="rgba(244,241,232,0.35)"/>
+              <text class="svg-tiny" x="320" y="416" text-anchor="middle">MCU</text>
+              <rect x="300" y="470" width="40" height="12" rx="3" fill="#2a3140"/>
+              <text class="svg-tiny" x="320" y="508" text-anchor="middle">USB-C</text>
+              <rect x="78" y="318" width="140" height="100" rx="10" fill="#161022" stroke="#c4b5fd"/>
+              <circle cx="148" cy="354" r="16" fill="none" stroke="#c4b5fd" stroke-width="1.5"/>
+              <text class="svg-tiny" x="148" y="396" text-anchor="middle">INMP441</text>
+              <path d="M218 360 H250" fill="none" stroke="rgba(244,241,232,0.45)" stroke-width="1.5"/>
+              <rect x="422" y="318" width="140" height="100" rx="10" fill="#0e1c18" stroke="#9be7c4"/>
+              <text class="svg-tiny" x="492" y="362" text-anchor="middle">MAX98357</text>
+              <text class="svg-tiny" x="492" y="384" text-anchor="middle">I2S AMP</text>
+              <path d="M390 360 H422" fill="none" stroke="rgba(244,241,232,0.45)" stroke-width="1.5"/>
+              <circle cx="492" cy="470" r="32" fill="none" stroke="#e6a15b" stroke-width="1.5"/>
+              <circle cx="492" cy="470" r="12" fill="none" stroke="#e6a15b" stroke-width="1.5"/>
+              <text class="svg-tiny" x="492" y="522" text-anchor="middle">4Ω 3W</text>
+              <text class="svg-tiny" x="60" y="610">I2S0 MIC</text>
+              <text class="svg-tiny" x="320" y="610" text-anchor="middle">8MB PSRAM</text>
+              <text class="svg-tiny" x="580" y="610" text-anchor="end">I2S1 SPEAKER</text>
+              <text class="svg-tiny svg-faint" x="60" y="640">NO SOLDER · BREADBOARD · JUMPERS</text>
+            </svg>
+            <span class="scanline" aria-hidden="true"></span>
+          </div>
+          <figcaption>ESP32-S3 on the bench. Hermes stays on your computer.</figcaption>
+        </figure>
+      </div>
+
+      <div class="container">
+        <div class="strip" aria-label="Project facts">
+          <article>
+            <p class="k">About $65</p>
+            <p class="s">Voice-body parts</p>
+          </article>
+          <article>
+            <p class="k">No solder</p>
+            <p class="s">Breadboard and jumpers</p>
+          </article>
+          <article>
+            <p class="k">Free LLM</p>
+            <p class="s">GLM-5.2 · Ollama Cloud</p>
+          </article>
+          <article>
+            <p class="k">MIT license</p>
+            <p class="s">Software included</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-kicker"><span>01</span> How it works</p>
+          <h2>Thin body. Big brain.</h2>
+          <p class="lede">The ESP32-S3 is the body: microphone in, speaker out. A computer you already have, running <a class="text-link" href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener noreferrer">Hermes Agent</a>, is the brain.</p>
+        </div>
+        <div class="flow">
+          <article class="step-card reveal">
+            <p class="step-index">01 · Hear</p>
+            <h3>It hears you</h3>
+            <p>An INMP441 I2S microphone captures your voice. Whisper tiny turns that speech into text on your machine, in English, at 16 kHz.</p>
+            <p class="step-spec">Local speech-to-text</p>
+          </article>
+          <article class="step-card reveal">
+            <p class="step-index">02 · Think</p>
+            <h3>Hermes decides</h3>
+            <p>In the voice build, the board sends audio over Wi-Fi. Hermes calls GLM-5.2. The key is read from your Hermes config or <code>OLLAMA_API_KEY</code>. It is never hard-coded.</p>
+            <p class="step-spec">Ollama Cloud free tier</p>
+          </article>
+          <article class="step-card reveal">
+            <p class="step-index">03 · Talk</p>
+            <h3>It answers aloud</h3>
+            <p>A MAX98357 amplifier drives a 4Ω 3W speaker. Edge TTS speaks the reply in the Andrew voice.</p>
+            <p class="step-spec">en-US Andrew</p>
+          </article>
+          <article class="step-card reveal">
+            <p class="step-index">04 · Learn</p>
+            <h3>Praise sticks</h3>
+            <p>Say “good boy” and that behavior’s score goes up. Say “no” and it goes down. Scores live in a JSON log, and higher scores are preferred next time.</p>
+            <p class="step-spec">Reward log</p>
+          </article>
+        </div>
+        <p class="note reveal">The hear → think → speak pipeline, the four personalities, reward training, and Telegram health monitoring are in the repository. The physical ESP32-S3 voice body is the piece still on the bench: parts have arrived, and assembly is in progress.</p>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-kicker"><span>02</span> Features</p>
+          <h2>What the project already does.</h2>
+          <p class="lede">These are the pieces checked off in the repository. Seeing and walking are on the roadmap, not in this list.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
+              <rect x="12" y="3" width="8" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M8 14a8 8 0 0 0 16 0M16 22v5M12 27h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <h3>Hears you</h3>
+            <p>INMP441 microphone plus local Whisper. The S3’s two I2S buses let the mic and the speaker run at the same time.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
+              <circle cx="8" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="24" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="24" cy="24" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M11 15l10-6M11 17l10 6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <h3>Thinks for free</h3>
+            <p>GLM-5.2 through Ollama Cloud’s free tier. No OpenAI subscription. Hermes is the agent that calls the model.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M6 12h6l6-6v20l-6-6H6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M22 12a6 6 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <h3>Talks back</h3>
+            <p>MAX98357 amp, 4Ω 3W speaker, Edge TTS, Andrew voice. The amp’s speaker leads screw in. Nothing is soldered.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
+              <rect x="4" y="6" width="10" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <rect x="18" y="6" width="10" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <rect x="4" y="18" width="10" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <rect x="18" y="18" width="10" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <h3>Four personalities</h3>
+            <p>Guard Dog, Playful Puppy, Smart Assistant, and Sassy Companion. It starts as the Playful Puppy. Say “be a puppy,” “guard mode,” “be professional,” or “be sassy.”</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M6 22l6-8 5 5 9-12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h3>Learns from you</h3>
+            <p>A reward log. Phrases like “good boy” raise a score. “No,” “stop,” and similar corrections lower it. The robot prefers the higher scores.</p>
+          </article>
+          <article class="card reveal">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true">
+              <rect x="10" y="3" width="12" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M14 7h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <h3>Reachable on Telegram</h3>
+            <p>Bots for robot control and health alerts. A debug monitor watches the brain and can restart it when something fails.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section band" id="kit">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-kicker"><span>03</span> The kit</p>
+          <h2>What’s in the $65 build.</h2>
+          <p class="lede">Voice-body parts from the project README. Prices there are approximate, not a store quote. You buy the parts. The software is free under the MIT license.</p>
+        </div>
+        <div class="kit-grid">
+          <div class="price-card reveal">
+            <p class="section-kicker"><span>~</span> Parts total</p>
+            <p class="price">$65</p>
+            <p class="price-note">The rows below add to $64. The README calls the build about $65.</p>
+            <p class="fine">Packs are cheaper than singles here: you use one of each and keep the rest as spares. That leaves 2 spare boards, 4 spare mics, and 1 spare amp.</p>
+            <div class="also">
+              <strong>Also required, not in the $65</strong>
+              <ul>
+                <li>A USB-C data cable. A charge-only cable will not talk to the board.</li>
+                <li>A computer to run Hermes. The voice guide uses a Mac mini as the example.</li>
+              </ul>
+            </div>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#join">Get build updates</a>
+              <a class="btn btn-ghost" href="https://github.com/sutringaung888-debug/sra-robot" target="_blank" rel="noopener noreferrer">View the source</a>
+            </div>
+          </div>
+          <div class="reveal">
+            <table class="bom">
+              <thead>
+                <tr>
+                  <th scope="col">Part</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">About</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="part-cell" data-label="Part">
+                    <span class="part-name">Hosyond ESP32-S3 N16R8</span>
+                    <span class="part-note">8MB PSRAM. Two I2S buses for mic and speaker.</span>
+                  </td>
+                  <td data-label="Qty">1 of a 3-pack</td>
+                  <td data-label="About">$19</td>
+                </tr>
+                <tr>
+                  <td class="part-cell" data-label="Part">
+                    <span class="part-name">AITRIP INMP441 I2S microphone</span>
+                    <span class="part-note">3.3V only. 5V destroys it.</span>
+                  </td>
+                  <td data-label="Qty">1 of a 5-pack</td>
+                  <td data-label="About">$12</td>
+                </tr>
+                <tr>
+                  <td class="part-cell" data-label="Part">
+                    <span class="part-name">MAX98357 I2S amplifier</span>
+                    <span class="part-note">Class-D. Speaker leads screw in.</span>
+                  </td>
+                  <td data-label="Qty">1 of a 2-pack</td>
+                  <td data-label="About">$7</td>
+                </tr>
+                <tr>
+                  <td class="part-cell" data-label="Part">
+                    <span class="part-name">4Ω 3W speaker</span>
+                    <span class="part-note">No solder.</span>
+                  </td>
+                  <td data-label="Qty">1 of a 4-pack</td>
+                  <td data-label="About">$10</td>
+                </tr>
+                <tr>
+                  <td class="part-cell" data-label="Part">
+                    <span class="part-name">ELEGOO jumper wires, 120pc</span>
+                    <span class="part-note">Board to mic and amp.</span>
+                  </td>
+                  <td data-label="Qty">1 pack</td>
+                  <td data-label="About">$7</td>
+                </tr>
+                <tr>
+                  <td class="part-cell" data-label="Part">
+                    <span class="part-name">ELEGOO breadboards, 830 + 400 point</span>
+                    <span class="part-note">Step 4 mounts on the 830-point board.</span>
+                  </td>
+                  <td data-label="Qty">1 pack</td>
+                  <td data-label="About">$9</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="why">
+              <h3>Why this board</h3>
+              <p>The README specifies the ESP32-S3 N16R8 because audio buffering and wake-word need 8MB of PSRAM, and the S3 can run the microphone and the speaker on separate I2S buses at the same time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="build">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-kicker"><span>04</span> Build</p>
+          <h2>Four steps to a talking body.</h2>
+          <p class="lede">Overview of the illustrated guide. The step 1 sketch is in the repo. Steps 2–4 are specified in the guide while the voice body is still being assembled.</p>
+        </div>
+        <ol class="timeline">
+          <li class="reveal">
+            <article class="time-card">
+              <p class="step-index">Step 1 of 4</p>
+              <h3>Bring the brain online</h3>
+              <p class="goal">Goal: the board answers over USB. No wiring yet.</p>
+              <p>Parts: one Hosyond ESP32-S3, a USB-C data cable, and your computer.</p>
+              <p>You should see the power LED, then the serial monitor at 115200 baud printing “SRA Robot Brain Online” and “alive 0”, “alive 1”… once a second. That sketch is <a class="text-link" href="https://github.com/sutringaung888-debug/sra-robot/blob/main/esp32/step1_hello/step1_hello.ino" target="_blank" rel="noopener noreferrer">esp32/step1_hello</a>. If the computer doesn’t see the board, hold BOOT while plugging it in.</p>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="time-card">
+              <p class="step-index">Step 2 of 4</p>
+              <h3>Give it a mouth</h3>
+              <p class="goal">Goal: the first sound from the speaker.</p>
+              <p>Parts: MAX98357 amp, 4Ω 3W speaker, and jumper wires. 5V goes to VIN, GND to GND, GPIO15 to BCLK, GPIO16 to LRC, and GPIO7 to DIN. Leave the amp’s SD gain pin unconnected. Strip the speaker leads and screw them in.</p>
+              <p>You should hear a rising two-tone beep every 2 seconds.</p>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="time-card">
+              <p class="step-index">Step 3 of 4</p>
+              <h3>Give it ears</h3>
+              <p class="goal">Goal: say a word and hear it played back.</p>
+              <p>Parts: the INMP441 and five jumpers. The amp stays wired. 3.3V to VDD — never 5V — GND to GND, GND to L/R for left-channel mode, GPIO4 to SCK, GPIO5 to WS, and GPIO6 to SD.</p>
+              <p>The mic is on I2S0 and the amp is on I2S1. Face the mic away from the speaker and keep those wires short.</p>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="time-card">
+              <p class="step-index">Step 4 of 4</p>
+              <h3>Make it a robot</h3>
+              <p class="goal">Goal: breadboard the parts, then reach Hermes over Wi-Fi.</p>
+              <p>Same pin map as steps 2 and 3. Power from the breadboard rails, not a daisy chain. The guide’s target moment is “Hey robot”: audio goes to Hermes on your computer, GLM thinks, and the speaker answers in Andrew’s voice.</p>
+              <p>USB can stay plugged in for debugging. Wi-Fi and USB work together.</p>
+            </article>
+          </li>
+        </ol>
+
+        <aside class="callout reveal">
+          <h3>Rules that keep the parts alive</h3>
+          <ul>
+            <li>The INMP441 is 3.3V only. 5V destroys it.</li>
+            <li>The MAX98357 can take 5V, which is louder, or 3.3V, which is quieter.</li>
+            <li>Unplug USB before you change a wire.</li>
+            <li>Hold BOOT while plugging in only if the computer does not see the board.</li>
+          </ul>
+        </aside>
+
+        <div class="pin-card reveal">
+          <h3>Pin map</h3>
+          <div class="pin-grid">
+            <div>
+              <h4>Mic · I2S0 · INMP441</h4>
+              <ul>
+                <li><code>3V3</code> → VDD</li>
+                <li><code>GND</code> → GND and L/R</li>
+                <li><code>GPIO4</code> → SCK</li>
+                <li><code>GPIO5</code> → WS</li>
+                <li><code>GPIO6</code> → SD</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Amp · I2S1 · MAX98357</h4>
+              <ul>
+                <li><code>5V</code> → VIN</li>
+                <li><code>GND</code> → GND</li>
+                <li><code>GPIO15</code> → BCLK</li>
+                <li><code>GPIO16</code> → LRC</li>
+                <li><code>GPIO7</code> → DIN</li>
+                <li>SD pin left unconnected</li>
+              </ul>
+            </div>
+          </div>
+          <p class="fine">Full drawings, wire colors, and troubleshooting live in <a class="text-link" href="https://github.com/sutringaung888-debug/sra-robot/blob/main/esp32/BUILD_GUIDE.html" target="_blank" rel="noopener noreferrer">esp32/BUILD_GUIDE.html</a>.</p>
+        </div>
+
+        <div class="code-block reveal">
+          <h3>The brain, on the computer</h3>
+          <p><code>install.sh</code> is the Raspberry Pi OS setup script in the repo. The README quick start is:</p>
+          <pre class="code"><code>git clone https://github.com/sutringaung888-debug/sra-robot.git
+cd sra-robot
+./install.sh
+python3 robot_brain.py</code></pre>
+          <p class="fine">Set the LLM endpoint in <code>config.json</code>. The key comes from your Hermes config or <code>OLLAMA_API_KEY</code>.</p>
+        </div>
+
+        <article class="later reveal" id="later">
+          <p class="tag">Later · not in the $65</p>
+          <h3>The dog body comes after the voice body.</h3>
+          <p>BUILD_PLAN.md is a second phase: a SunFounder PiDog with Hermes on a Raspberry Pi 5. No soldering iron, no 3D printer, no wire strippers. A small Phillips screwdriver is included. The plan says no robotics experience is required, and it lists assembly at 1–2 hours. The README still marks this body, and vision, as not done.</p>
+          <div class="later-grid">
+            <div>
+              <h4>Published budget</h4>
+              <table class="budget">
+                <tbody>
+                  <tr><td>SunFounder PiDog kit</td><td>$179.99</td></tr>
+                  <tr><td>Raspberry Pi 5, 4GB</td><td>$110</td></tr>
+                  <tr><td>Pi 5 active cooler</td><td>$5</td></tr>
+                  <tr class="total"><td>List total</td><td>$295</td></tr>
+                  <tr class="total"><td>With the plan’s Amazon Visa note</td><td>$245</td></tr>
+                </tbody>
+              </table>
+              <p class="fine">The “under $250” line in that plan is the $245 figure, from $50 off the PiDog. A 64GB microSD is about $10 more if you don’t already have one, and it is not inside the $295.</p>
+            </div>
+            <div>
+              <h4>In the PiDog box</h4>
+              <ul>
+                <li>12-servo body that snaps together</li>
+                <li>Camera, microphone, and speaker</li>
+                <li>Gyroscope, ultrasonic, and touch sensor</li>
+                <li>Battery, charger, and Python library</li>
+                <li>Phone app for iOS and Android, plus tutorials</li>
+              </ul>
+            </div>
+          </div>
+          <div class="later-grid">
+            <div>
+              <h4>Assembly overview</h4>
+              <ol>
+                <li>Snap the body together</li>
+                <li>Insert the Pi 5</li>
+                <li>Connect the camera ribbon</li>
+                <li>Connect the servo cables to the Pi’s GPIO</li>
+                <li>Insert a microSD card with Pi OS</li>
+                <li>Connect the battery</li>
+                <li>Power on</li>
+              </ol>
+            </div>
+            <div>
+              <h4>Software the plan calls for</h4>
+              <ul>
+                <li>Hermes Agent on the Pi 5</li>
+                <li>GLM-5.2 via Ollama Cloud</li>
+                <li>PiDog Python library for the 12 servos</li>
+                <li>Whisper tiny and Edge TTS</li>
+                <li>OpenCV and MediaPipe for vision</li>
+                <li>A Hermes Telegram gateway</li>
+                <li>OpenClaw, which the plan says the PiDog kit supports</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section band" id="status">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-kicker"><span>05</span> Status</p>
+          <h2>Where the project is.</h2>
+          <p class="lede">Same checklist as the repository README. Nothing here is marked done ahead of that list.</p>
+        </div>
+        <ul class="roadmap reveal">
+          <li class="is-done">
+            <span class="mark" aria-hidden="true"></span>
+            <p><span class="state">Done</span> Brain: hear → think → speak pipeline</p>
+          </li>
+          <li class="is-done">
+            <span class="mark" aria-hidden="true"></span>
+            <p><span class="state">Done</span> Personality system</p>
+          </li>
+          <li class="is-done">
+            <span class="mark" aria-hidden="true"></span>
+            <p><span class="state">Done</span> Behavior training, the reward log</p>
+          </li>
+          <li class="is-done">
+            <span class="mark" aria-hidden="true"></span>
+            <p><span class="state">Done</span> Health monitoring and Telegram bots</p>
+          </li>
+          <li class="is-wip">
+            <span class="mark" aria-hidden="true"></span>
+            <p><span class="state">In progress</span> ESP32-S3 voice body. Parts arrived, assembly in progress.</p>
+          </li>
+          <li>
+            <span class="mark" aria-hidden="true"></span>
+            <p><span class="state">Not yet</span> Vision: face detection and follow-me</p>
+          </li>
+          <li>
+            <span class="mark" aria-hidden="true"></span>
+            <p><span class="state">Not yet</span> PiDog body: walk, tricks, patrol</p>
+          </li>
+          <li>
+            <span class="mark" aria-hidden="true"></span>
+            <p><span class="state">Not yet</span> Publish and share</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="section-kicker"><span>06</span> FAQ</p>
+          <h2>Straight answers.</h2>
+        </div>
+        <div class="faq reveal">
+          <div class="faq-item">
+            <h3 class="faq-q">
+              <button type="button" id="faq-btn-1" aria-expanded="true" aria-controls="faq-panel-1">Is this a finished robot I can buy? <span class="chev" aria-hidden="true"></span></button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
+              <p>No. SRA Robot is an open-source build. You buy the parts on the list and assemble them. The software in this repository is MIT licensed, free to use.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">
+              <button type="button" id="faq-btn-2" aria-expanded="false" aria-controls="faq-panel-2">What does about $65 include? <span class="chev" aria-hidden="true"></span></button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" hidden>
+              <p>The voice-body parts in the README: an ESP32-S3 N16R8 board, an INMP441 mic, a MAX98357 amp, a 4Ω 3W speaker, jumper wires, and breadboards. Those approximate prices add to $64. A USB-C data cable and a computer to run Hermes are separate. The PiDog phase is a different budget.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">
+              <button type="button" id="faq-btn-3" aria-expanded="false" aria-controls="faq-panel-3">Do I need to solder or 3D-print? <span class="chev" aria-hidden="true"></span></button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" hidden>
+              <p>No. The voice body is jumper wires, a breadboard, and screw terminals on the amplifier. The later PiDog plan is snap-together and includes a small Phillips screwdriver. Neither plan uses a soldering iron or a 3D printer.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">
+              <button type="button" id="faq-btn-4" aria-expanded="false" aria-controls="faq-panel-4">Do I need a paid AI subscription? <span class="chev" aria-hidden="true"></span></button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" hidden>
+              <p>No OpenAI subscription. Thinking uses GLM-5.2 through Ollama Cloud’s free tier. You still need a network connection for that model and for Edge TTS. Whisper itself runs locally.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">
+              <button type="button" id="faq-btn-5" aria-expanded="false" aria-controls="faq-panel-5">What runs the brain? <span class="chev" aria-hidden="true"></span></button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5" hidden>
+              <p>Hermes Agent on a computer you already have. The voice-body guide uses a Mac mini as the example host. The later PiDog plan moves that brain onto a Raspberry Pi 5. <code>install.sh</code> is written for Raspberry Pi OS.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">
+              <button type="button" id="faq-btn-6" aria-expanded="false" aria-controls="faq-panel-6">Why the ESP32-S3 N16R8? <span class="chev" aria-hidden="true"></span></button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-6" role="region" aria-labelledby="faq-btn-6" hidden>
+              <p>The README chooses it because 8MB of PSRAM is required for audio buffering and wake-word, and the S3’s two I2S buses can run the microphone and the speaker together.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">
+              <button type="button" id="faq-btn-7" aria-expanded="false" aria-controls="faq-panel-7">Does it see and walk yet? <span class="chev" aria-hidden="true"></span></button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-7" role="region" aria-labelledby="faq-btn-7" hidden>
+              <p>Not yet. The roadmap lists Pi Camera face detection with OpenCV, and a SunFounder PiDog body with 12 servos, as upcoming. The brain, personalities, reward training, and Telegram health monitoring are already in the repo.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">
+              <button type="button" id="faq-btn-8" aria-expanded="false" aria-controls="faq-panel-8">Does the form send my email anywhere? <span class="chev" aria-hidden="true"></span></button>
+            </h3>
+            <div class="faq-panel" id="faq-panel-8" role="region" aria-labelledby="faq-btn-8" hidden>
+              <p>No. It is a placeholder on this static page. Your details stay in the browser and are not sent or stored. The working link today is the <a class="text-link" href="https://github.com/sutringaung888-debug/sra-robot" target="_blank" rel="noopener noreferrer">repository</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="join">
+      <div class="container">
+        <div class="join-panel reveal">
+          <div class="join-copy">
+            <p class="section-kicker"><span>07</span> Contact</p>
+            <h2>Follow the build.</h2>
+            <p class="lede">The voice body is in assembly. Leave a note if you want updates when the guide, the ESP32 sketches, or the PiDog phase move.</p>
+            <p class="fine">Until a real list is connected, the source of truth is <a class="text-link" href="https://github.com/sutringaung888-debug/sra-robot" target="_blank" rel="noopener noreferrer">github.com/sutringaung888-debug/sra-robot</a>. Built by Sut Ring Aung.</p>
+          </div>
+          <div>
+            <p class="form-status" role="status" aria-live="polite"></p>
+            <form class="signup-form" action="#join" method="get" novalidate>
+              <div class="form-row">
+                <label>Name
+                  <input id="name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="Your name">
+                </label>
+                <label>Email
+                  <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="120" placeholder="you@email.com">
+                </label>
+              </div>
+              <label>I want updates about
+                <select id="interest" name="interest" required>
+                  <option value="" selected disabled>Choose one</option>
+                  <option value="voice">The $65 voice body</option>
+                  <option value="pidog">The later PiDog phase</option>
+                  <option value="both">Both</option>
+                  <option value="code">Just the source code</option>
+                </select>
+              </label>
+              <label>Note <span class="sr-only">(optional)</span>
+                <textarea id="message" name="message" maxlength="1000" placeholder="Optional. A question, or which part you’re starting with."></textarea>
+              </label>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Request updates</button>
+                <p class="legal">Placeholder only. This page does not send or store what you type.</p>
+              </div>
+            </form>
+            <div class="form-done" hidden tabindex="-1">
+              <p class="section-kicker"><span>OK</span> Preview</p>
+              <h3>Thanks, <span data-who></span>.</h3>
+              <p>Nothing was sent or stored. This static form only confirmed the fields in your browser.</p>
+              <p><a class="text-link" href="https://github.com/sutringaung888-debug/sra-robot" target="_blank" rel="noopener noreferrer">Open the repository</a> to follow the code directly.</p>
+            </div>
+            <noscript>
+              <p class="fine">The preview form needs JavaScript, and even then it does not send your message anywhere.</p>
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div>
+        <p class="wordmark">SRA Robotics</p>
+        <p class="tagline">Brain first. Body later. Build the future.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#how">How it works</a>
+        <a href="#kit">Kit</a>
+        <a href="#build">Build</a>
+        <a href="#faq">FAQ</a>
+        <a href="#join">Updates</a>
+        <a href="https://github.com/sutringaung888-debug/sra-robot/blob/main/esp32/BUILD_GUIDE.html" target="_blank" rel="noopener noreferrer">Wiring guide</a>
+        <a href="https://github.com/sutringaung888-debug/sra-robot" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">SRA Robot v2.0 · MIT license · Built by Sut Ring Aung. Facts on this page come from the repository README, build plan, and ESP32 voice guide.</p>
+    </div>
+  </footer>
+  <script src="main.js" defer></script>
+</body>
+</html>
