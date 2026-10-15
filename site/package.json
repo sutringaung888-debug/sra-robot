@@ -1,0 +1,19 @@
+{
+  "name": "sra-robotics-site",
+  "version": "2.0.0",
+  "private": true,
+  "description": "SRA Robotics landing page: Vite + Three.js, with a static fallback.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}
